@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import Rasmus from './Rasmus.jsx'
+import Rasmus from './Components/Rasmus.jsx'
 
 function App() {
   return (
