@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import Rasmus from './Components/Rasmus.jsx'
 import NavBar from './Views/NavBar'
+import LoginView from './Views/LoginView.jsx'
+
 
 function App() {
   return (
-    <BrowserRouter>
     <div className="App">
       <NavBar />
       <h1 className="m-2">Hello, Edwin!</h1>
@@ -14,8 +14,8 @@ function App() {
       <Routes >
         <Route path="rasmus" element={<Rasmus />} />
       </Routes>
+      <LoginView />
     </div>
-    </BrowserRouter>
   )
 }
 
