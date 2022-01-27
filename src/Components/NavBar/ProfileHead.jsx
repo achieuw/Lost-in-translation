@@ -8,7 +8,12 @@ const ProfileHead = (props) => {
 
     return (
         <>
-            <p className="primary-font primary-text-col">{name}</p>
+            {/* dont render if no name provided */}
+            {name !== "" ? 
+            <div className="flex rounded-full input-text-col">
+                <p className="primary-font primary-text-col">{name}</p> 
+            </div>
+            :<></>}
         </>
     )
 }
