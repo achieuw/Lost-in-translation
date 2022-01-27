@@ -15,9 +15,9 @@ const NavBar = () => {
   return (
       <>
         <div className='flex yellow border-color gap-4 py-2'>
-            <div className='flex relative w-12 ml-6'>
-                <img src={Splash} className=''/>
-                <img src={Logo} className='absolute w-12'/>
+            <div className='flex relative ml-20'>
+                <img src={Splash} className='w-16'/>
+                <img src={Logo} className='absolute left-2 top-2 w-12'/>
             </div>
             <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             <ProfileHead name="Edwin"/>
