@@ -24,3 +24,18 @@ code {
 .body-font{
   font-family: 'Sanchez', serif;
 }
+.yellow{
+  background-color: #FFC75F;
+}
+.border-color{
+  border: 2px solid #E7B355;
+}
+.purple{
+  background-color: #845EC2;
+}
+.input-text-col{
+  color: #EFEFEF;
+}
+.primary-text-col{
+  color: #969696;
+}
