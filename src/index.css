@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sanchez&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
   margin: 0;
@@ -14,4 +17,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.primary-font{
+  font-family: 'Love Ya Like A Sister', cursive;
+}
+.body-font{
+  font-family: 'Sanchez', serif;
 }
