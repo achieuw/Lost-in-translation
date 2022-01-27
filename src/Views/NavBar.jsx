@@ -14,12 +14,12 @@ import NavbarHead from '../Components/NavBar/NavbarHead'
 const NavBar = () => {
   return (
       <>
-        <div className='flex yellow border-color gap-4 py-2'>
-            <div className='flex relative ml-20'>
+        <div className='flex yellow border-color gap-4 py-2 justify-between px-20'>
+            <div className='flex relative gap-3'>
                 <img src={Splash} className='w-16'/>
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
+                <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             <NavbarHead name="Edwin"/>
         </div>
       </>
