@@ -4,7 +4,7 @@
  */
 import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
-import ProfileHead from '../Components/NavBar/ProfileHead'
+import NavbarHead from '../Components/NavBar/NavbarHead'
 
 
 /**
@@ -20,7 +20,7 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
             </div>
             <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
-            <ProfileHead name="Edwin"/>
+            <NavbarHead name="Edwin"/>
         </div>
       </>
   );
