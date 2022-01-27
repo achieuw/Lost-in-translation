@@ -1,5 +1,5 @@
-import Logo from "../../public/LostInTranslation_Resources/Logo.png";
-import Splash from "../../public/LostInTranslation_Resources/Splash.svg";
+import Logo from "/LostInTranslation_Resources/Logo.png";
+import Splash from "/LostInTranslation_Resources/Splash.svg";
 const LoginView = () => {
   return (
     // IMPORT NAVBAR COMPONENT
@@ -7,7 +7,7 @@ const LoginView = () => {
     <div className="primary-text-col w-full h-[50vh] bg-[#FFC75F]">
       <div>
           <div>
-          <img src={Splash}></img>
+          <img className="w-0" src={Splash}></img>
         <img className="w-24" src={Logo}></img>
           </div>
         
