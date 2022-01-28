@@ -57,3 +57,12 @@ h5{
 h6{
   font-size: 0.67em;
 }
+.text-size-xl{
+  font-size: 2.5em;
+}
+.linear-white-purple{
+  background: linear-gradient(#ffffff 0%, #ffffff 87%, #845EC2 88%, #845EC2 100%);
+}
+.form-shadow{
+  box-shadow: 0 0 10px 0 rgba(90, 90, 90, 0.7);
+}
