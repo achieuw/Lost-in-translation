@@ -3,7 +3,7 @@
  * @ignore
  */
 import { useReducer } from "react";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../contexts/UserContext";
 
 
 export const UserReducer = () => {

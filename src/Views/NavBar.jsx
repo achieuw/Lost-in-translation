@@ -7,7 +7,7 @@ import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
 import { NavLink } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
-import { UserReducer } from '../Components/reducers/UserReducer';
+import { UserReducer } from '../reducers/UserReducer';
 
 /**
  * Component
@@ -20,7 +20,7 @@ const NavBar = () => {
   const [user, dispatch] = UserReducer();
 
   const handleSetUsername = async () => {
-    const 
+    
 
     dispatch({
       type: 'setUser',
