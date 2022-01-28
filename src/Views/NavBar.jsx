@@ -6,13 +6,32 @@ import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
 import { NavLink } from 'react-router-dom';
-
+import { useUserContext } from '../contexts/UserContext';
+import { UserReducer } from '../Components/reducers/UserReducer';
 
 /**
  * Component
  * @ignore
  */
 const NavBar = () => {
+
+  // const [user, setUser] = useUserContext();
+
+  const [user, dispatch] = UserReducer();
+
+  const handleSetUsername = async () => {
+    const 
+
+    dispatch({
+      type: 'setUser',
+      user: {
+        id: 0,
+        username: "Edwin",
+        translations: []
+      }
+    })
+  }
+
   return (
       <>
         <div className='flex yellow border-color gap-4 py-2 justify-between px-20'>
@@ -21,7 +40,9 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
                 <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <NavLink to="/profile"><NavbarHead name="Edwin"/></NavLink>
+            <button type='button' className='bg-slate-500' onClick={handleSetUsername}>Set Username</button>
+            <p>{user.username}</p>
+            <NavbarHead name={user.username}/>
         </div>
       </>
   );
