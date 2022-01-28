@@ -1,11 +1,10 @@
 import Logo from "/LostInTranslation_Resources/Logo.png";
 import Splash from "/LostInTranslation_Resources/Splash.svg";
-import InputBox from '../../src/Components/InputBox.jsx'
+import LoginForm from "../Components/LoginForm/LoginForm.jsx";
 
 const LoginView = () => {
-  return (
-    // IMPORT NAVBAR COMPONENT
-    <>
+  const header = (() => {
+    return (
       <div className="flex justify-center items-center primary-text-col w-full h-[40vh] bg-[#FFC75F]">
         <div className="flex flex-row justify-center h-48 items-center">
           <div className="mr-6">
@@ -17,15 +16,19 @@ const LoginView = () => {
             <h1 className="primary-font drop-shadow text-size-xl">
               Lost in Translation
             </h1>
-            <h3 className="body-font text-2xl">Get started</h3>
+            <h3 className="body-font text-2xl drop-shadow">Get started</h3>
           </div>
         </div>
       </div>
+    );
+  })();
+  return (
+    // IMPORT NAVBAR COMPONENT
+    <>
+      {header}
 
       <div className="flex justify-center">
-        <form className="-mt-20 pb-12 pt-7 rounded-xl form-shadow w-4/6 relative z-30 linear-white-purple">
-          <InputBox placeholder="What's your name?" />
-        </form>
+        <LoginForm />
       </div>
     </>
   );
