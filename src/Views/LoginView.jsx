@@ -1,5 +1,5 @@
-import Logo from "../../public/LostInTranslation_Resources/Logo.png";
-import Splash from "../../public/LostInTranslation_Resources/Splash.svg";
+import Logo from "/LostInTranslation_Resources/Logo.png";
+import Splash from "/LostInTranslation_Resources/Splash.svg";
 import LoginForm from "../Components/LoginForm/LoginForm.jsx";
 
 const LoginView = () => {
