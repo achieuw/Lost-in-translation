@@ -5,6 +5,7 @@
 import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
+import { NavLink } from 'react-router-dom';
 
 
 /**
@@ -20,7 +21,7 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
                 <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <NavbarHead name="Edwin"/>
+            <NavLink to="/profile"><NavbarHead name="Edwin"/></NavLink>
         </div>
       </>
   );

@@ -7,10 +7,14 @@ import LoginView from './Views/LoginView.jsx'
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <LoginView />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<LoginView />}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
