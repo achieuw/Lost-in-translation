@@ -5,6 +5,7 @@ import NavBar from './Views/NavBar'
 import LoginView from './Views/LoginView.jsx'
 import ProfileView from './Views/ProfileView.jsx'
 import TranslationView from './Views/TranslationView'
+import NotFoundView from './Views/NotFoundView'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<LoginView />}/>
           <Route path="/profile" element={<ProfileView />}/>
           <Route path="/translation" element={<TranslationView />}/>
+          <Route path ="/*" element={<NotFoundView />} />
         </Routes>
       </div>
     </BrowserRouter>
