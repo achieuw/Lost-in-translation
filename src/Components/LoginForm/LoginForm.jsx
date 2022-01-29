@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import { apiGetUser } from "../../Api/TranslationAPI";
+import { loginUser, UserReducer } from "../../reducers/UserReducer";
+import { useNavigate } from 'react-router-dom'
 
 const usernameConfig = {
   required: true,
@@ -7,27 +8,34 @@ const usernameConfig = {
 };
 
 const LoginForm = () => {
+  const [user, dispatch] = UserReducer();
+  const navigate = useNavigate()
+
+  const handleSetUsername = async (username) => {
+    dispatch(await loginUser(username));
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // Handles login 
   const onSubmit = async (data) => {
-    //console.log(data);
+    await handleSetUsername(data.username)
+    navigate(`/profile/${data.username}`)
   };
 
   const errorMessage = (() => {
     if (!errors.username) {
       return null;
     }
-
     if (errors.username.type === "required") {
       return <span>Enter a name to continue</span>;
     }
-
     if (errors.username.type === "minLength") {
-      return <span>Name is too short (min. length 3)</span>;
+      return <span>Name is too short (min. length 2)</span>;
     }
   })();
 
@@ -50,7 +58,9 @@ const LoginForm = () => {
           </button>
         </div>
       </fieldset>
-      <div className="error-message rounded-lg mt-2 w-4/6 text-center mx-auto bg-red-600 text-red-50 body-font leading-10">{errorMessage}</div>
+      <div className="error-message rounded-lg mt-2 w-4/6 text-center mx-auto bg-red-600 text-red-50 body-font leading-10">
+        {errorMessage}
+      </div>
     </form>
   );
 };

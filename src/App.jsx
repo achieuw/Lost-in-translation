@@ -15,7 +15,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<LoginView />}/>
-          <Route path="/profile" element={<ProfileView />}/>
+          <Route path="/profile/:username" element={<ProfileView />}/>
           <Route path="/translation" element={<TranslationView />}/>
           <Route path ="/*" element={<NotFoundView />} />
         </Routes>
