@@ -17,7 +17,7 @@ const NavBar = () => {
 
   // const [user, setUser] = useUserContext();
 
-  const [user, dispatch] = UserReducer();
+  const {user, dispatch} = useUserContext();
 
   const handleSetUsername = async () => {
     dispatch(await loginUser("edwine"))

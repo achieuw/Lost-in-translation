@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
-import { loginUser, UserReducer } from "../../reducers/UserReducer";
+// import { loginUser, UserReducer } from "../../reducers/UserReducer";
+import { loginUser, useUserContext } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+
 
 const usernameConfig = {
   required: true,
@@ -8,7 +10,7 @@ const usernameConfig = {
 };
 
 const LoginForm = () => {
-  const [user, dispatch] = UserReducer();
+  const { user, dispatch } = useUserContext();
   const navigate = useNavigate()
 
   const handleSetUsername = async (username) => {
