@@ -1,0 +1,19 @@
+import { useUserContext } from '../../contexts/UserContext';
+import UserImg from '/user.png'
+
+const ProfileInfo = () => {
+    const { user } = useUserContext()
+
+    return (
+        <div className='flex items-center'>
+            <div className='-mr-1 w-32 purple rounded-full'>
+            <img className='invert' src={UserImg} alt="" />
+            </div>
+            <div className='rounded-r-full purple px-10 py-2'>
+            <h3 className='primary-font primary-text-col pointer-events-none'>{ user.username }</h3>
+            </div>
+        </div>
+    );
+};
+
+export default ProfileInfo
