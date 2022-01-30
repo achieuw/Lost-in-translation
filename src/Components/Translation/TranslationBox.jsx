@@ -2,7 +2,6 @@ const TranslationBox = (props) => {
   const signs = props.translations.map ((signs) => {
     return (
       <li className="w-20" key={signs.key}>
-
         {signs.sign !== null ? <img src={signs.sign}></img> : <></>}
       </li>
     );

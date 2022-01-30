@@ -6,7 +6,7 @@ import ErrorMsgBox from "../Misc/ErrorMsgBox";
 
 const translationConfig = {
   required: true,
-  pattern:/^[A-Za-z]/
+  pattern: /^[a-zA-Z\s]*$/
 };
 
 const Translationinput = () => {
