@@ -15,6 +15,8 @@ export const loginUser = async (username) => {
         return {type: 'error'}
     }
 
+    localStorage.setItem('translate-user', JSON.stringify(loggedUser))
+
     return {type: 'loginUser', user: loggedUser}
 }
 
@@ -40,7 +42,11 @@ const userReducer = (oldUser, action) => {
  */
 const UserProvider = ({ children }) => {
 
-    const [user, dispatch] = useReducer(userReducer, { username: "" })
+    const initUser = localStorage.getItem('translate-user') ? JSON.parse(localStorage.getItem('translate-user')) : { username: "" };
+
+    console.log(initUser);
+
+    const [user, dispatch] = useReducer(userReducer, initUser)
 
     const state = { user, dispatch }
 
