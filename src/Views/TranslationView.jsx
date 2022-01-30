@@ -1,8 +1,10 @@
+import Translationinput from "../Components/Translation/TranslationInput";
+
 const TranslationView = () => {
   return (
     <>
-      <h1>Translation View</h1>
+      <Translationinput />
     </>
   );
 };
- export default TranslationView
+export default TranslationView;

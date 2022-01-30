@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { loginUser, useUserContext } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+import ErrorMsgBox from '../Misc/ErrorMsgBox'
 
 
 const usernameConfig = {
@@ -59,9 +60,7 @@ const LoginForm = () => {
           </button>
         </div>
       </fieldset>
-      <div className="error-message rounded-lg mt-2 w-4/6 text-center mx-auto bg-red-600 text-red-50 body-font leading-10">
-        {errorMessage}
-      </div>
+      <ErrorMsgBox errorMessage={errorMessage} />
     </form>
   );
 };
