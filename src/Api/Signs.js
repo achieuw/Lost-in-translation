@@ -1,15 +1,15 @@
-const signsUrl = "LostInTranslation_Resources/individial_signs/"
+const signsUrl = "LostInTranslation_Resources/individial_signs/";
 
 export const getSigns = (stringToTranslate) => {
-  let keyIndex = 0
-  const signs = []
+  let keyIndex = 0;
+  const signs = [];
 
-  stringToTranslate.split('').forEach(c => {
-      if(c !== ' '){
-        let sign = {key: keyIndex++, sign: `${signsUrl}${c}.png`}
-        signs.push(sign)
-      }
+  stringToTranslate.split("").forEach((c) => {
+    if (c !== " ") {
+      let sign = { key: keyIndex++, sign: `${signsUrl}${c}.png` };
+      signs.push(sign);
+    }
   });
 
-  return signs
-}
+  return signs;
+};

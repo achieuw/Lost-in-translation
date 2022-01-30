@@ -8,4 +8,4 @@ const ErrorMsgBox = (props) => {
   );
 };
 
-export default ErrorMsgBox
+export default ErrorMsgBox;

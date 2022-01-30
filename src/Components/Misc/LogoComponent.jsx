@@ -5,16 +5,8 @@ const LogoComponent = (props) => {
   const size = props.size;
   return (
     <div>
-      <img
-        className="absolute z-10 mt-4"
-        width={size}
-        src={Splash}
-      ></img>
-      <img
-        className="relative z-20"
-        width={size}
-        src={Logo}
-      ></img>
+      <img className="absolute z-10 mt-4" width={size} src={Splash}></img>
+      <img className="relative z-20" width={size} src={Logo}></img>
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { getSigns } from "../../Api/Signs";
-import {useState} from "react"
-import TranslationBox from "./TranslationBox.jsx"
+import { useState } from "react";
+import TranslationBox from "./TranslationBox.jsx";
 import ErrorMsgBox from "../Misc/ErrorMsgBox";
 
 const translationConfig = {
   required: true,
-  pattern: /^[a-zA-Z\s]*$/
+  pattern: /^[a-zA-Z\s]*$/,
 };
 
 const Translationinput = () => {
@@ -16,7 +16,7 @@ const Translationinput = () => {
     formState: { errors },
   } = useForm();
 
-  const [translations, setTranslations] = useState([])
+  const [translations, setTranslations] = useState([]);
 
   const submit = (data) => {
     setTranslations(getSigns(data.translation));
@@ -55,7 +55,6 @@ const Translationinput = () => {
       </div>
       <TranslationBox translations={translations} />
       <ErrorMsgBox errorMessage={errorMessage} />
-
     </>
   );
 };
