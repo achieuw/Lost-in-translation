@@ -8,7 +8,7 @@ const ProfileInfo = ({ username }) => {
             <img className='invert' src={UserImg} alt="" />
             </div>
             <div className='rounded-r-full purple px-10 py-2'>
-            <h3 className='primary-font primary-text-col pointer-events-none'>{ username }</h3>
+            <h3 className='body-font primary-text-col pointer-events-none'>{ username }</h3>
             </div>
         </div>
     );
