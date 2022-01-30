@@ -1,8 +1,6 @@
-import { useUserContext } from '../../contexts/UserContext';
 import UserImg from '/user.png'
 
-const ProfileInfo = () => {
-    const { user } = useUserContext()
+const ProfileInfo = ({ username }) => {
 
     return (
         <div className='flex items-center'>
@@ -10,7 +8,7 @@ const ProfileInfo = () => {
             <img className='invert' src={UserImg} alt="" />
             </div>
             <div className='rounded-r-full purple px-10 py-2'>
-            <h3 className='primary-font primary-text-col pointer-events-none'>{ user.username }</h3>
+            <h3 className='primary-font primary-text-col pointer-events-none'>{ username }</h3>
             </div>
         </div>
     );
