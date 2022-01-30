@@ -25,7 +25,7 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
                 <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <NavLink to="/profile">
+            <NavLink to={`/profile/${user.username}`}>
               <NavbarHead name={user.username}/>
             </NavLink>
         </div>
