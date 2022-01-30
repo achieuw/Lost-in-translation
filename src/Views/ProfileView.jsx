@@ -1,9 +1,11 @@
 import ProfileInfo from '../Components/Profile/ProfileInfo';
 import ProfileLogout from '../Components/Profile/ProfileLogout';
 import ProfileTranslationsList from '../Components/Profile/ProfileTranslationsList'
+import { useUserContext } from '../contexts/UserContext'
 
 const ProfileView = () => {
 
+  const { user } = useUserContext()
 
   return (
     <div className="flex flex-col items-center">
@@ -11,7 +13,7 @@ const ProfileView = () => {
         <ProfileInfo />
         <ProfileLogout />
       </div>
-      <ProfileTranslationsList />
+      <ProfileTranslationsList translations={user.translations}/>
     </div>
   );
 };
