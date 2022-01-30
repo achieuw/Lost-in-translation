@@ -26,7 +26,7 @@ const LoginForm = () => {
   // Handles login 
   const onSubmit = async (data) => {
     await handleSetUsername(data.username)
-    navigate(`/profile/${data.username}`)
+    navigate(`/translation`)
   };
 
   const errorMessage = (() => {
