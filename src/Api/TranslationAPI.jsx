@@ -35,7 +35,7 @@ async function apiCreateUser(username) {
             throw new Error('Could not create new user')
         }
 
-        const data = response.json()
+        const data = await response.json()
 
         return [null, data]
 
