@@ -15,11 +15,7 @@ const NavBar = () => {
 
   // const [user, setUser] = useUserContext();
 
-  const {user, dispatch} = useUserContext();
-
-  const handleSetUsername = async () => {
-    dispatch(await loginUser("edwine"))
-  }
+  const {user} = useUserContext();
 
   return (
       <>
@@ -29,8 +25,6 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
                 <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <button type='button' className='bg-slate-500' onClick={handleSetUsername}>Set Username</button>
-            <p>{user.username}</p>
             <NavLink to="/profile">
               <NavbarHead name={user.username}/>
             </NavLink>
