@@ -1,9 +1,9 @@
-import Translationinput from "../Components/Translation/TranslationInput";
+import TranslationForm from "../Components/Translation/TranslationForm";
 
 const TranslationView = () => {
   return (
     <>
-      <Translationinput />
+      <TranslationForm />
     </>
   );
 };
