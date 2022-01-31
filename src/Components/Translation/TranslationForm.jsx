@@ -4,7 +4,7 @@ import { useState } from "react";
 import TranslationInput from "./TranslationInput.jsx";
 import ErrorMsgBox from "../Misc/ErrorMsgBox";
 import { apiAddTranslation } from "../../Api/TranslationAPI";
-import { useUserContext } from "../../contexts/UserContext";
+import { addTranslation, useUserContext } from "../../contexts/UserContext";
 
 // Config doesnt allow empty input or characters other than a-z and white space
 const translationConfig = {
@@ -14,7 +14,7 @@ const translationConfig = {
 
 // Form hook to handle input data
 const TranslationForm = () => {
-  const { user } = useUserContext()
+  const { user, dispatch } = useUserContext()
 
   const {
     register,
@@ -27,7 +27,7 @@ const TranslationForm = () => {
   // Output translate signs and add translate to user api
   const submit = async (data) => {
     setTranslations(getSigns(data.translation));
-    await apiAddTranslation(user.username, data.translation);
+    dispatch(await addTranslation(user, data.translation))
   };
 
   // Set error message if errors in translation input (check translationConfig)

@@ -58,20 +58,19 @@ export async function apiLoginUser(username) {
     return await apiCreateUser(username)
 }
 
-export async function apiAddTranslation(username, translation) {
-    const [ error, user ] = await apiGetUser(username)
-    const newTranslations = user[0].translations
+export async function apiAddTranslation(user, translation) {
+    const newTranslations = user.translations
     newTranslations.push(translation)
 
     try {
-        const response = await fetch(`${BASE_URL}/${user[0].id}`, {
+        const response = await fetch(`${BASE_URL}/${user.id}`, {
             method: 'PATCH',
             headers: {
                 'x-api-key': API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username,
+                username: user.username,
                 translations: newTranslations
             })
         })

@@ -4,7 +4,7 @@
  */
 
 import { createContext, useContext, useReducer } from "react";
-import { apiLoginUser } from "../Api/TranslationAPI";
+import { apiAddTranslation, apiLoginUser } from "../Api/TranslationAPI";
 
 export const UserContext = createContext()
 
@@ -26,6 +26,20 @@ export const logoutUser = () => {
     localStorage.removeItem('translate-user')
     
     return {type: 'logoutUser', user: { username: "", translations: [] }}
+}
+
+export const addTranslation = async (user, translation) => {
+    const [ error, newUser ] = await apiAddTranslation(user, translation)
+
+    console.log(newUser);
+
+    if (error !== null) {
+        return {type: 'error'}
+    }
+
+    localStorage.setItem('translate-user', JSON.stringify(newUser))
+
+    return {type: 'addTranslation', user: newUser}
 }
 
 export const deleteTranslations = (translations) => {
@@ -51,13 +65,15 @@ const userReducer = (oldUser, action) => {
             return action.user
         case 'logoutUser':
             return action.user
+        case 'addTranslation':
+            return action.user
         case 'deleteTranslations':
             return {
                 ...oldUser,
                 translations: action.translations
             }
         default:
-            return;
+            return oldUser;
     }
 }
 
