@@ -6,7 +6,7 @@ import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
 import { NavLink } from 'react-router-dom';
-import { useUserContext, loginUser } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 /**
  * Component
  * @ignore
