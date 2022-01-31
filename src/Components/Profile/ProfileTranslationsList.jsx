@@ -2,8 +2,18 @@ import ProfileTranslationItem from "./ProfileTranslationItem";
 
 const ProfileTranslationsList = ({ translations, handleDeleteTranslations }) => {
 
-    const translationItems = translations.map((translation, index) =>  <ProfileTranslationItem key={index + '-' + translation} translation={ translation }/>).reverse().slice(0, 10)
-
+    // create an element for each translation
+    const translationItems = translations.map((translation, index) => {
+        // if translation is marked as deleted, dont make an element
+        if (typeof translation === 'object' && translation.deleted) {
+            return
+        } else if (typeof translation === 'object' && !translation.deleted) { // else if not marked as deleted, create an element
+            return <ProfileTranslationItem key={index + '-'+ translation.translation} translation={ translation.translation } />
+        }
+        // if translation is not an object, create an element a different way
+        return <ProfileTranslationItem key={index + '-' + translation} translation={ translation }/>
+    }).reverse().filter(x => x).slice(0, 10)
+        
     const handleDeleteLastTen = () => {
         handleDeleteTranslations()
     }
