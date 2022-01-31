@@ -9,7 +9,7 @@ const ProfileView = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex justify-between items-center primary-text-col w-full h-[20vh] yellow px-32">
+      <div className="flex justify-between items-center primary-text-col w-full h-[25vh] yellow px-32">
         <ProfileInfo username={ user.username } />
         <ProfileLogout />
       </div>
