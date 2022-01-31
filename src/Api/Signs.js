@@ -1,7 +1,8 @@
 const signsUrl = "LostInTranslation_Resources/individial_signs/";
 
+// Loop through translation string and return respective sign
 export const getSigns = (stringToTranslate) => {
-  let keyIndex = 0;
+  let keyIndex = 0; // Bad keys
   const signs = [];
 
   stringToTranslate.split("").forEach((c) => {

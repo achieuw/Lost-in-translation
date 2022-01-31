@@ -3,7 +3,7 @@ import { loginUser, useUserContext } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import ErrorMsgBox from '../Misc/ErrorMsgBox'
 
-
+// Username config specs: input required, at least 2 chars
 const usernameConfig = {
   required: true,
   minLength: 2,
@@ -23,12 +23,13 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  // Handles login 
+  // Log in user and navigate to translation view
   const onSubmit = async (data) => {
     await handleSetUsername(data.username)
     navigate(`/translation`)
   };
 
+  // Set input error message element
   const errorMessage = (() => {
     if (!errors.username) {
       return null;

@@ -7,6 +7,7 @@ const TranslationView = () => {
   const {user} = useUserContext()
   const navigate = useNavigate()
 
+  // Navigate to login view if user is not set
   useEffect(() => {
     if(user.username === "") {
       navigate("/")
