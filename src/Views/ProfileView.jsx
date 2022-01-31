@@ -3,10 +3,12 @@ import ProfileLogout from '../Components/Profile/ProfileLogout';
 import ProfileTranslationsList from '../Components/Profile/ProfileTranslationsList'
 import { deleteTranslations, logoutUser, useUserContext } from '../contexts/UserContext'
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileView = () => {
 
   const { user, dispatch } = useUserContext()
+  const navigate = useNavigate();
 
   // Navigate to login view if user is not set
   useEffect(() => {
