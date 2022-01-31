@@ -14,8 +14,8 @@ const ProfileTranslationsList = ({ translations, handleDeleteTranslations }) => 
         return <ProfileTranslationItem key={index + '-' + translation} translation={ translation }/>
     }).reverse().filter(x => x).slice(0, 10)
         
-    const handleDeleteLastTen = () => {
-        handleDeleteTranslations()
+    const handleDeleteLastTen = async () => {
+        await handleDeleteTranslations()
     }
 
     return (

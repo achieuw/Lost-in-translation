@@ -4,7 +4,7 @@
  */
 
 import { createContext, useContext, useReducer } from "react";
-import { apiAddTranslation, apiLoginUser } from "../Api/TranslationAPI";
+import { apiAddTranslation, apiLoginUser, apiUpdateTranslations } from "../Api/TranslationAPI";
 import { STORAGE_KEY_USER } from "../const/storageKeys";
 
 export const ACTION_LOGIN_USER = "[user] loginUser"
@@ -41,14 +41,14 @@ export const addTranslation = async (user, translation) => {
     return {type: ACTION_ADD_TRANSLATION, translation: translationObj}
 }
 
-export const deleteTranslations = (translations) => {
-
-    const deletions = translations.length > 10 ? 10 : translations.length
+export const deleteTranslations = async (userId, translations) => {
+    const newTranslations = [...translations]
+    const deletions = newTranslations.length > 10 ? 10 : newTranslations.length
     const deletedTranslations = []
 
     let count = 0;
     while (count < deletions) {
-        const removedTranslation = translations.pop()
+        const removedTranslation = newTranslations.pop()
         if (typeof removedTranslation === 'object' && removedTranslation.deleted === false) {
             removedTranslation.deleted = true
             deletedTranslations.push(removedTranslation)
@@ -64,11 +64,13 @@ export const deleteTranslations = (translations) => {
     for (let i = 0; i < deletedTranslations.length; i++) {
         const element = deletedTranslations[i];
         if (element.translation !== undefined) {
-            translations.push(element)
+            newTranslations.push(element)
         }
     }
 
-    return {type: ACTION_DELETE_TRANSLATION , translations: translations}
+    await apiUpdateTranslations(userId, newTranslations)
+
+    return {type: ACTION_DELETE_TRANSLATION , translations: newTranslations}
 }
 
 export const useUserContext = () => {
@@ -94,10 +96,12 @@ const userReducer = (oldUser, action) => {
             localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(updatedUser))
             return updatedUser
         case ACTION_DELETE_TRANSLATION:
-            return {
+            const translatedUser = {
                 ...oldUser,
                 translations: action.translations
             }
+            localStorage.setItem(STORAGE_KEY_USER, translatedUser)
+            return translatedUser
         default:
             return oldUser;
     }
