@@ -10,7 +10,7 @@ const LoginView = () => {
 
   useEffect(() => {
     if(user.username !== "") {
-      navigation("./translation")
+      navigation("/translation")
     }
   })
 

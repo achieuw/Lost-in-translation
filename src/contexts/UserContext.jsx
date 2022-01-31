@@ -5,9 +5,16 @@
 
 import { createContext, useContext, useReducer } from "react";
 import { apiAddTranslation, apiLoginUser } from "../Api/TranslationAPI";
+import { STORAGE_KEY_USER } from "../const/storageKeys";
 
-export const UserContext = createContext()
+export const ACTION_LOGIN_USER = "[user] loginUser"
+export const ACTION_LOGOUT_USER = "[user] logoutUser"
+export const ACTION_ADD_TRANSLATION = "[user] addTranslation"
+export const ACTION_DELETE_TRANSLATION = "[user] deleteTranslation"
 
+const UserContext = createContext()
+
+// Actions
 export const loginUser = async (username) => {
     const [ error, loggedUser ] = await apiLoginUser(username)
 
@@ -15,31 +22,30 @@ export const loginUser = async (username) => {
         return {type: 'error'}
     }
 
-    localStorage.setItem('translate-user', JSON.stringify(loggedUser))
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(loggedUser))
 
-    return {type: 'loginUser', user: loggedUser}
+    return {type: ACTION_LOGIN_USER, user: loggedUser}
 }
 
 export const logoutUser = () => {
 
     // delete from local storage
-    localStorage.removeItem('translate-user')
+    localStorage.removeItem(STORAGE_KEY_USER)
     
-    return {type: 'logoutUser', user: { username: "", translations: [] }}
+    return {type: ACTION_LOGOUT_USER, user: { username: "", translations: [] }}
 }
 
 export const addTranslation = async (user, translation) => {
+    // Fetch in middleware
     const [ error, newUser ] = await apiAddTranslation(user, translation)
-
-    console.log(newUser);
 
     if (error !== null) {
         return {type: 'error'}
     }
 
-    localStorage.setItem('translate-user', JSON.stringify(newUser))
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(newUser))
 
-    return {type: 'addTranslation', user: newUser}
+    return {type: ACTION_ADD_TRANSLATION, user: newUser}
 }
 
 export const deleteTranslations = (translations) => {
@@ -50,7 +56,7 @@ export const deleteTranslations = (translations) => {
         translations.pop()
     }
 
-    return {type: 'deleteTranslations', translations: translations}
+    return {type: ACTION_DELETE_TRANSLATION , translations: translations}
 }
 
 export const useUserContext = () => {
@@ -59,15 +65,14 @@ export const useUserContext = () => {
 
 // reducer function
 const userReducer = (oldUser, action) => {
-    // console.log(action.user)
     switch (action.type) {
-        case 'loginUser':
+        case ACTION_LOGIN_USER:
             return action.user
-        case 'logoutUser':
+        case ACTION_LOGOUT_USER:
             return action.user
-        case 'addTranslation':
+        case ACTION_ADD_TRANSLATION:
             return action.user
-        case 'deleteTranslations':
+        case ACTION_DELETE_TRANSLATION:
             return {
                 ...oldUser,
                 translations: action.translations
@@ -83,7 +88,7 @@ const userReducer = (oldUser, action) => {
  */
 const UserProvider = ({ children }) => {
 
-    const initUser = localStorage.getItem('translate-user') ? JSON.parse(localStorage.getItem('translate-user')) : { username: "", translations: [] };
+    const initUser = localStorage.getItem(STORAGE_KEY_USER) ? JSON.parse(localStorage.getItem(STORAGE_KEY_USER)) : { username: "", translations: [] };
 
     const [user, dispatch] = useReducer(userReducer, initUser)
 

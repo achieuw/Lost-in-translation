@@ -9,7 +9,7 @@ const usernameConfig = {
   minLength: 2,
 };
 
-const LoginForm = () => {
+const LoginForm = () => { 
   const { user, dispatch } = useUserContext();
   const navigate = useNavigate()
 
