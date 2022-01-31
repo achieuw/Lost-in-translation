@@ -20,6 +20,25 @@ export const loginUser = async (username) => {
     return {type: 'loginUser', user: loggedUser}
 }
 
+export const logoutUser = () => {
+
+    // delete from local storage
+    localStorage.removeItem('translate-user')
+    
+    return {type: 'logoutUser', user: { username: "", translations: [] }}
+}
+
+export const deleteTranslations = (translations) => {
+
+    const deletions = translations.length > 10 ? 10 : translations.length
+
+    for (let i = 0; i < deletions; i++) {
+        translations.pop()
+    }
+
+    return {type: 'deleteTranslations', translations: translations}
+}
+
 export const useUserContext = () => {
     return useContext(UserContext);
 }
@@ -29,8 +48,14 @@ const userReducer = (oldUser, action) => {
     // console.log(action.user)
     switch (action.type) {
         case 'loginUser':
-            console.log(action.user);
             return action.user
+        case 'logoutUser':
+            return action.user
+        case 'deleteTranslations':
+            return {
+                ...oldUser,
+                translations: action.translations
+            }
         default:
             return;
     }
@@ -42,9 +67,7 @@ const userReducer = (oldUser, action) => {
  */
 const UserProvider = ({ children }) => {
 
-    const initUser = localStorage.getItem('translate-user') ? JSON.parse(localStorage.getItem('translate-user')) : { username: "" };
-
-    console.log(initUser);
+    const initUser = localStorage.getItem('translate-user') ? JSON.parse(localStorage.getItem('translate-user')) : { username: "", translations: [] };
 
     const [user, dispatch] = useReducer(userReducer, initUser)
 
