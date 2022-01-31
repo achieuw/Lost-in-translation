@@ -4,7 +4,7 @@
  */
 
 import { createContext, useContext, useReducer } from "react";
-import { apiAddTranslation, apiLoginUser } from "../Api/TranslationAPI";
+import { apiAddTranslation, apiLoginUser, apiUpdateTranslations } from "../Api/TranslationAPI";
 import { STORAGE_KEY_USER } from "../const/storageKeys";
 
 export const ACTION_LOGIN_USER = "[user] loginUser"
@@ -22,41 +22,55 @@ export const loginUser = async (username) => {
         return {type: 'error'}
     }
 
-    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(loggedUser))
-
     return {type: ACTION_LOGIN_USER, user: loggedUser}
 }
 
 export const logoutUser = () => {
-
-    // delete from local storage
-    localStorage.removeItem(STORAGE_KEY_USER)
-    
-    return {type: ACTION_LOGOUT_USER, user: { username: "", translations: [] }}
+    return {type: ACTION_LOGOUT_USER}
 }
 
 export const addTranslation = async (user, translation) => {
+    const translationObj = {translation, deleted: false};
     // Fetch in middleware
-    const [ error, newUser ] = await apiAddTranslation(user, translation)
+    const [ error, newUser ] = await apiAddTranslation(user, translationObj)
 
     if (error !== null) {
         return {type: 'error'}
     }
 
-    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(newUser))
-
-    return {type: ACTION_ADD_TRANSLATION, user: newUser}
+    return {type: ACTION_ADD_TRANSLATION, translation: translationObj}
 }
 
-export const deleteTranslations = (translations) => {
+export const deleteTranslations = async (userId, translations) => {
+    const newTranslations = [...translations]
+    const deletions = newTranslations.length > 10 ? 10 : newTranslations.length
+    const deletedTranslations = []
 
-    const deletions = translations.length > 10 ? 10 : translations.length
-
-    for (let i = 0; i < deletions; i++) {
-        translations.pop()
+    let count = 0;
+    while (count < deletions) {
+        const removedTranslation = newTranslations.pop()
+        if (typeof removedTranslation === 'object' && removedTranslation.deleted === false) {
+            removedTranslation.deleted = true
+            deletedTranslations.push(removedTranslation)
+            count++
+        } else if (typeof removedTranslation !== 'object'){
+            deletedTranslations.push({translation: removedTranslation, deleted: true})
+            count++
+        } else {
+            deletedTranslations.push(removedTranslation)
+        }
     }
 
-    return {type: ACTION_DELETE_TRANSLATION , translations: translations}
+    for (let i = 0; i < deletedTranslations.length; i++) {
+        const element = deletedTranslations[i];
+        if (element.translation !== undefined) {
+            newTranslations.push(element)
+        }
+    }
+
+    await apiUpdateTranslations(userId, newTranslations)
+
+    return {type: ACTION_DELETE_TRANSLATION , translations: newTranslations}
 }
 
 export const useUserContext = () => {
@@ -67,16 +81,27 @@ export const useUserContext = () => {
 const userReducer = (oldUser, action) => {
     switch (action.type) {
         case ACTION_LOGIN_USER:
+            // save to local storage
+            localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(action.user))
             return action.user
         case ACTION_LOGOUT_USER:
-            return action.user
+            // delete from local storage
+            localStorage.removeItem(STORAGE_KEY_USER)
+            return {username: "", translations: []}
         case ACTION_ADD_TRANSLATION:
-            return action.user
+            //format updated user
+            const updatedUser = {...oldUser,
+                translations : [...oldUser.translations,
+                                action.translation]}
+            localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(updatedUser))
+            return updatedUser
         case ACTION_DELETE_TRANSLATION:
-            return {
+            const translatedUser = {
                 ...oldUser,
                 translations: action.translations
             }
+            localStorage.setItem(STORAGE_KEY_USER, translatedUser)
+            return translatedUser
         default:
             return oldUser;
     }

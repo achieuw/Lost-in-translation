@@ -19,8 +19,8 @@ const ProfileView = () => {
     dispatch(logoutUser())
   }
 
-  const handleDeleteTranslations = () => {
-    dispatch(deleteTranslations([...user.translations]))
+  const handleDeleteTranslations = async () => {
+    dispatch( await deleteTranslations(user.id, [...user.translations]))
   }
 
   const handleToTranslateClick = () => {

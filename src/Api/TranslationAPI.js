@@ -59,7 +59,7 @@ export async function apiLoginUser(username) {
 }
 
 export async function apiAddTranslation(user, translation) {
-    const newTranslations = user.translations
+    const newTranslations = [...user.translations]
     newTranslations.push(translation)
 
     try {
@@ -83,6 +83,30 @@ export async function apiAddTranslation(user, translation) {
         const data = await response.json()
         return [null, data]
 
+    } catch (error) {
+        return [error.message, null]
+    }
+}
+
+export async function apiUpdateTranslations(userId, translations) {
+    try {
+        const response = await fetch(`${BASE_URL}/${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'x-api-key': API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                translations: translations
+            })
+        })
+
+        if (!response.ok) {
+            throw new Error('Could not update translations')
+        }
+
+        const data = await response.json()
+        return [null, data]
     } catch (error) {
         return [error.message, null]
     }
