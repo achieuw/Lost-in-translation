@@ -59,7 +59,7 @@ export async function apiLoginUser(username) {
 }
 
 export async function apiAddTranslation(user, translation) {
-    const newTranslations = user.translations
+    const newTranslations = [...user.translations]
     newTranslations.push(translation)
 
     try {
