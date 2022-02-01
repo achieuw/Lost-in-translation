@@ -1,5 +1,6 @@
 import { BASE_URL, API_KEY } from ".";
 
+// Fetch user from api
 async function apiGetUser(username) {
     try {
         const response = await fetch(`${BASE_URL}?username=${username}`)
@@ -10,13 +11,16 @@ async function apiGetUser(username) {
 
         const data = await response.json()
 
+        // return error as null and data
         return [ null, data ]
 
     } catch (error) {
+        // or return error and data as null
         return [ error.message, null ]
     }
 }
 
+// post user to api
 async function apiCreateUser(username) {
     try {
         const response = await fetch(BASE_URL, {
@@ -37,32 +41,42 @@ async function apiCreateUser(username) {
 
         const data = await response.json()
 
+        // return error as null and data
         return [null, data]
 
     } catch (error) {
+        // or return error and data as null
         return [error.message, null]
     }
 }
 
+// function that combines get and create
 export async function apiLoginUser(username) {
+    // fetch username
     const [error, user] = await apiGetUser(username)
 
     if(error !== null) {
         return [error, null]
     }
 
+    // if user does not exist
     if(user.length > 0) {
         return [null, user.pop()]
     }
 
+    // create user
     return await apiCreateUser(username)
 }
 
+// add translation to api
 export async function apiAddTranslation(user, translation) {
+    // copy translations array
     const newTranslations = [...user.translations]
+    // add new translation to it
     newTranslations.push(translation)
 
     try {
+        // patch api
         const response = await fetch(`${BASE_URL}/${user.id}`, {
             method: 'PATCH',
             headers: {
@@ -88,6 +102,7 @@ export async function apiAddTranslation(user, translation) {
     }
 }
 
+// update translations (for "deleted")
 export async function apiUpdateTranslations(userId, translations) {
     try {
         const response = await fetch(`${BASE_URL}/${userId}`, {
