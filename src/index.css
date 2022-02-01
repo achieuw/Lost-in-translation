@@ -78,3 +78,4 @@ h6{
 
 /* Rules for using icons as black on a light background. */
 .material-icons.md-purple { color: #845EC2; }
+.material-icons:hover.md-purple { color: #5f438b; }
