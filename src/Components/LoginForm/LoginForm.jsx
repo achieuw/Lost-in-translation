@@ -51,7 +51,7 @@ const LoginForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="min-w-[360px] max-w-[500px] -mt-20 pb-12 pt-7 rounded-xl form-shadow z-30 linear-white-purple"
     >
-      <fieldset className="flex justify-center px-8">
+      <fieldset disabled={loading} className="flex justify-center px-8">
         <div className="flex justify-center items-center h-14 g-gray-200 border-color-gray bg-gray-200 rounded-3xl">
           <span className="material-icons px-2">edit</span>
           <input
