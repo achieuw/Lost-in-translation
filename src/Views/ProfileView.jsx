@@ -22,7 +22,7 @@ const ProfileView = () => {
   }
 
   const handleDeleteTranslations = async () => {
-    dispatch( await deleteTranslations(user.id, [...user.translations]))
+    dispatch( await deleteTranslations(user.id, user.translations))
   }
 
   const handleToTranslateClick = () => {

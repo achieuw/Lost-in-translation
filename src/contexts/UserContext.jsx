@@ -96,11 +96,9 @@ const userReducer = (oldUser, action) => {
             localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(updatedUser))
             return updatedUser
         case ACTION_DELETE_TRANSLATION:
-            const translatedUser = {
-                ...oldUser,
-                translations: action.translations
-            }
-            localStorage.setItem(STORAGE_KEY_USER, translatedUser)
+            const translatedUser = {...oldUser,
+                translations: action.translations}
+            localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(translatedUser))
             return translatedUser
         default:
             return oldUser;
@@ -113,7 +111,7 @@ const userReducer = (oldUser, action) => {
  */
 const UserProvider = ({ children }) => {
 
-    const initUser = localStorage.getItem(STORAGE_KEY_USER) ? JSON.parse(localStorage.getItem(STORAGE_KEY_USER)) : { username: "", translations: [] };
+    const initUser = localStorage.getItem(STORAGE_KEY_USER) ? JSON.parse(localStorage.getItem(STORAGE_KEY_USER)) : { username: "", translations: [] }
 
     const [user, dispatch] = useReducer(userReducer, initUser)
 
