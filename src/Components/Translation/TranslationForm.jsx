@@ -3,18 +3,19 @@ import { getSigns } from "../../Api/Signs";
 import { useState } from "react";
 import TranslationInput from "./TranslationInput.jsx";
 import ErrorMsgBox from "../Misc/ErrorMsgBox";
-import { apiAddTranslation } from "../../Api/TranslationAPI";
 import { addTranslation, useUserContext } from "../../contexts/UserContext";
 
 // Config doesnt allow empty input or characters other than a-z and white space
+// and a maximum of 40 characters
 const translationConfig = {
   required: true,
   pattern: /^[a-zA-Z\s]*$/,
+  maxLength: 40,
 };
 
 // Form hook to handle input data
 const TranslationForm = () => {
-  const { user, dispatch } = useUserContext()
+  const { user, dispatch } = useUserContext();
 
   const {
     register,
@@ -22,24 +23,29 @@ const TranslationForm = () => {
     formState: { errors },
   } = useForm();
 
+  // Translations hook
   const [translations, setTranslations] = useState([]);
 
   // Output translate signs and add translate to user api
   const submit = async (data) => {
     setTranslations(getSigns(data.translation));
-    dispatch(await addTranslation(user, data.translation))
+    dispatch(await addTranslation(user, data.translation));
+    console.log(user);
   };
 
   // Set error message if errors in translation input (check translationConfig)
   const errorMessage = (() => {
     if (!errors.translation) {
       return null;
-    }
+    }  // No input
     if (errors.translation.type === "required") {
       return <span>Enter a sentence to continue</span>;
-    }
+    }  // Invalid characters
     if (errors.translation.type === "pattern") {
       return <span>Enter valid characters (a-z)</span>;
+    }  // Character limit reached
+    if (errors.translation.type === "maxLength") {
+      return <span>Maximum amount of characters is 40.</span>;
     }
   })();
   return (

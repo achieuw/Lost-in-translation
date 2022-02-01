@@ -1,4 +1,5 @@
 const TranslationInput = (props) => {
+  // Return a sign element for every letter in translation
   const signs = props.translations.map((signs) => {
     return (
       <li className="w-20" key={signs.key}>
