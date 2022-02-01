@@ -35,7 +35,7 @@
 <h3 align="center">Bestest Sign Translations</h3>
 
   <p align="center">
-    Assignment 2
+    Assignment 3
     <br />
     <a href="https://github.com/achieuw/lost-in-translation"><strong>Explore the docs »</strong></a>
     <br />
