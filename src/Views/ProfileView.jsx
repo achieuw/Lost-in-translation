@@ -5,6 +5,10 @@ import { deleteTranslations, logoutUser, useUserContext } from '../contexts/User
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component
+ * @ignore
+ */
 const ProfileView = () => {
 
   const { user, dispatch } = useUserContext()
@@ -17,14 +21,17 @@ const ProfileView = () => {
     }
   }, [user])
 
+  // logout user
   const handleLogoutUser = () => {
     dispatch(logoutUser())
   }
 
+  // "delete" translations
   const handleDeleteTranslations = async () => {
     dispatch( await deleteTranslations(user.id, user.translations))
   }
 
+  // navigate to translation view
   const handleToTranslateClick = () => {
     navigate('/translation')
   }
@@ -40,4 +47,5 @@ const ProfileView = () => {
     </div>
   );
 };
- export default ProfileView
+
+export default ProfileView

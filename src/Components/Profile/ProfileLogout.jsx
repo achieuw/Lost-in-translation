@@ -1,4 +1,8 @@
 
+/**
+ * Component
+ * @ignore
+ */
 const ProfileLogout = ({ onLogoutClick }) => {
 
     const handleOnLogoutClick = () => {

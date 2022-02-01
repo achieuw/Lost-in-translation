@@ -1,8 +1,9 @@
-import { useState } from "react";
 
-
+/**
+ * Component
+ * @ignore
+ */
 const ProfileTranslationItem = ({ translation }) => {
-
 
     return (
         <>

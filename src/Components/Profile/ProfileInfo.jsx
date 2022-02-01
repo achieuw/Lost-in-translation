@@ -1,5 +1,9 @@
 import UserImg from '/user.png'
 
+/**
+ * Component
+ * @ignore
+ */
 const ProfileInfo = ({ username }) => {
 
     return (
