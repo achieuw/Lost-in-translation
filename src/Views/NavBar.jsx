@@ -5,7 +5,7 @@
 import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
 /**
  * Component
@@ -13,9 +13,13 @@ import { useUserContext } from '../contexts/UserContext';
  */
 const NavBar = () => {
 
-  // const [user, setUser] = useUserContext();
-
+  // get user obj from context
   const {user} = useUserContext();
+  const navigate = useNavigate();
+
+  const handleToProfileClick = () => {
+    navigate(`/profile/${user.username}`);
+  }
 
   return (
       <>
@@ -25,9 +29,7 @@ const NavBar = () => {
                 <img src={Logo} className='absolute left-2 top-2 w-12'/>
                 <h2 className='primary-font primary-text-col p-2'>Lost in Translation</h2>
             </div>
-            <NavLink to={`/profile/${user.username}`}>
-              <NavbarHead name={user.username}/>
-            </NavLink>
+            <NavbarHead toProfileClick={ handleToProfileClick } name={user.username}/>
         </div>
       </>
   );
