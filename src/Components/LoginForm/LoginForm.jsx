@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { loginUser, useUserContext } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import ErrorMsgBox from '../Misc/ErrorMsgBox'
+import { useState } from "react";
 
 // Username config specs: input required, at least 2 chars
 const usernameConfig = {
@@ -12,6 +13,7 @@ const usernameConfig = {
 const LoginForm = () => { 
   const { user, dispatch } = useUserContext();
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
 
   const handleSetUsername = async (username) => {
     dispatch(await loginUser(username));
@@ -25,7 +27,9 @@ const LoginForm = () => {
 
   // Log in user and navigate to translation view
   const onSubmit = async (data) => {
+    setLoading(true)
     await handleSetUsername(data.username)
+    setLoading(false)
     navigate(`/translation`)
   };
 
@@ -56,9 +60,10 @@ const LoginForm = () => {
             placeholder="What's your name?"
             {...register("username", usernameConfig)}
           ></input>
-          <button type="submit" className="material-icons md-purple md-48">
+          {loading && <div className="border-t-black animate-spin inline-block w-8 h-8 border-4 rounded-full m-2" />}
+          {!loading && <button type="submit" className="material-icons md-purple md-48">
             arrow_circle_right
-          </button>
+          </button>}
         </div>
       </fieldset>
       <ErrorMsgBox errorMessage={errorMessage} />
