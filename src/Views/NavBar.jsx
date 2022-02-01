@@ -5,7 +5,7 @@
 import Splash from '/LostInTranslation_Resources/Splash.svg'
 import Logo from '/LostInTranslation_Resources/Logo.png'
 import NavbarHead from '../Components/NavBar/NavbarHead'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserContext';
 /**
  * Component
