@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NavBar from './Views/NavBar'
 import LoginView from './Views/LoginView.jsx'
 import ProfileView from './Views/ProfileView.jsx'
